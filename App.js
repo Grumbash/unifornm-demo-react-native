@@ -1,13 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,6 +8,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {useQuery, gql} from '@apollo/client';
 
 import {
   Colors,
@@ -26,8 +18,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const Section = ({children, title}): Node => {
+const PAGES = gql`
+  query getPages {
+    pageCollection {
+      items {
+        name
+        linkTo
+        sys {
+          id
+        }
+      }
+    }
+  }
+`;
+
+const Section = ({children, title}) => {
   const isDarkMode = useColorScheme() === 'dark';
+
   return (
     <View style={styles.sectionContainer}>
       <Text
@@ -52,8 +59,12 @@ const Section = ({children, title}): Node => {
   );
 };
 
-const App: () => Node = () => {
+const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const {loading, error, data} = useQuery(PAGES);
+
+  console.log(data);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

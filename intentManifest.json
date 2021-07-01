@@ -1,0 +1,61 @@
+{
+  "site": {
+    "sampleSize": 0,
+    "intents": [
+      {
+        "id": "grandPrix",
+        "signals": [
+          {
+            "type": "EVT",
+            "freq": "always",
+            "scope": "visitor",
+            "str": 50,
+            "label": {
+              "cs": false,
+              "expr": "grandPrix",
+              "type": "exact"
+            },
+            "value": {
+              "cs": false,
+              "expr": "grandPrix",
+              "type": "exact"
+            },
+            "category": {
+              "cs": false,
+              "expr": "grandPrix",
+              "type": "exact"
+            }
+          }
+        ]
+      },
+      {
+        "id": "about",
+        "signals": [
+          {
+            "type": "EVT",
+            "freq": "always",
+            "scope": "visitor",
+            "str": 75,
+            "label": {
+              "cs": false,
+              "expr": "about",
+              "type": "exact"
+            },
+            "value": {
+              "cs": false,
+              "expr": "about",
+              "type": "exact"
+            },
+            "category": {
+              "cs": false,
+              "expr": "about",
+              "type": "exact"
+            }
+          }
+        ]
+      }
+    ],
+    "enrichments": [],
+    "tests": []
+  }
+}
