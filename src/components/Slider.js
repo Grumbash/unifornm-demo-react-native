@@ -1,7 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-// import Carousel from 'react-native-snap-carousel';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {useQuery, gql} from '@apollo/client';
+import Carousel from '../components/Carousel';
 
 const SLIDES = gql`
   query getSlides($id: String!) {
@@ -43,38 +43,30 @@ const SLIDES = gql`
   }
 `;
 
-// const RenderItem = ({item, index}) => {
-//   return (
-//     <View style={styles.slide}>
-//       <Text style={styles.title}>{item.title}</Text>
-//     </View>
-//   );
-// };
-
 const Slider = props => {
   const {loading, error, data} = useQuery(SLIDES, {
     variables: {
       id: props.id,
     },
   });
-  console.log({props, data});
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+  const mappedSides = data.carouselCollection.items.map(slide => {
+    return {
+      ...slide,
+      intentTag: slide.unfrmOptIntentTag,
+    };
+  });
   return (
-    <View>
-      <Text>1</Text>
+    <View style={{flex: 1}}>
+      <Carousel
+        data={data}
+        mappedSides={mappedSides}
+        pageLink={props.pageLink}
+      />
     </View>
   );
-  //   <Carousel
-  //     ref={c => {
-  //       this._carousel = c;
-  //     }}
-  //     data={this.state.entries}
-  //     renderItem={RenderItem}
-  //     sliderWidth={500}
-  //     itemWidth={400}
-  //   />
-  // );
 };
 
 export default Slider;
-
-const styles = StyleSheet.create({});
