@@ -20,6 +20,7 @@ const Carousel = ({pageLink, mappedSides, data}) => {
         renderItem={CarouselItem}
         sliderWidth={300}
         itemWidth={300}
+        layoutCardOffset={'18'}
       />
     );
   }

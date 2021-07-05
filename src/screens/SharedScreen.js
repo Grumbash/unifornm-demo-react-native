@@ -1,10 +1,18 @@
 import React from 'react';
-import {Text, View, ActivityIndicator, StyleSheet} from 'react-native';
+import {
+  Text,
+  View,
+  ActivityIndicator,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import {useQuery, gql} from '@apollo/client';
 import {useUniformTracker} from '@uniformdev/optimize-tracker-react';
 import {useIsFocused} from '@react-navigation/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 import Slider from '../components/Slider';
+import Section from '../components/Section';
 
 const PAGE = gql`
   fragment Image on MediaImage {
@@ -103,11 +111,16 @@ function Screen({page, navigation, route}) {
     },
   } = data;
   return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>{name}</Text>
-      <Text>{pageContent.title}</Text>
-      <Slider id={pageContent.sys.id} pageLink={linkTo} />
-    </View>
+    <SafeAreaView style={[styles.flex1]}>
+      <ScrollView>
+        <View style={styles.contentView}>
+          <Text>{name}</Text>
+          <Text>{pageContent.title}</Text>
+          <Slider id={pageContent.sys.id} pageLink={linkTo} />
+          <Section panesCollection={panesCollection.items} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -120,6 +133,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     padding: 10,
+  },
+  contentView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  flex1: {
+    flex: 1,
   },
 });
 

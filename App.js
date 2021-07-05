@@ -3,6 +3,7 @@ import {View, ActivityIndicator, StyleSheet} from 'react-native';
 import {useQuery, gql} from '@apollo/client';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import wrapper from './src/hocs/routeWrapper';
 import SharedScreen from './src/screens/SharedScreen';
 
@@ -33,18 +34,20 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        {data.pageCollection.items.map(page => (
-          <Tab.Screen
-            name={page.name}
-            component={wrapper(SharedScreen)(page)}
-            key={page.sys.id}
-            state={page}
-          />
-        ))}
-      </Tab.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          {data.pageCollection.items.map(page => (
+            <Tab.Screen
+              name={page.name}
+              component={wrapper(SharedScreen)(page)}
+              key={page.sys.id}
+              state={page}
+            />
+          ))}
+        </Tab.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 };
 

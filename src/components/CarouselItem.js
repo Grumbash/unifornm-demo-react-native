@@ -18,8 +18,11 @@ const CarouselItem = ({item}) => {
 
 const styles = StyleSheet.create({
   img: {
-    width: '100%',
-    height: '100%',
+    borderRadius: 5,
+    height: 250,
+    padding: 50,
+    marginLeft: 25,
+    marginRight: 25,
   },
 });
 

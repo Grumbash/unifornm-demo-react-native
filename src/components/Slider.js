@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {useQuery, gql} from '@apollo/client';
 import Carousel from '../components/Carousel';
 
